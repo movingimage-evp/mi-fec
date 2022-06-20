@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import { VideosTable } from './components/videos-table';
 import { getVideos } from './services/videos';
 import { ProcessedVideo } from './common/interfaces';
