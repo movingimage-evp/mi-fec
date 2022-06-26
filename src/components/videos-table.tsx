@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import { ProcessedVideo } from '../common/interfaces';
+import { getVideos } from '../services/videos';
 
-interface VideosTableProps {
-    videos: ProcessedVideo[];
-}
 
-export const VideosTable: React.FC<VideosTableProps> = ({ videos }) => {
+
+export const VideosTable = () => {
+
+  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
+
+  useEffect(() => {
+    getVideos()
+      .then((videos) => {
+        setVideos(videos);
+      });
+  }, []);
+
   return (
     <TableContainer component={Paper} style={{ marginTop: '40px' }}>
       <Table>

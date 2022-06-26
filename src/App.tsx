@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import { VideosTable } from './components/videos-table';
-import { getVideos } from './services/videos';
-import { ProcessedVideo } from './common/interfaces';
+import { Outlet, useNavigate } from "react-router-dom";
+import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
 
-const App: React.FC = () => {
-  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
+export const App = () => {
 
-  useEffect(() => {
-    getVideos()
-      .then((videos) => {
-        setVideos(videos);
-      });
-  }, []);
-
+  const navigate = useNavigate();
   return (
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">Videos</Typography>
+          <Typography variant="h6" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => navigate("/")}>Videos</Typography>
+          <Button color="success" variant="contained" onClick={() => navigate("/add-video")}>Add Video</Button>
         </Toolbar>
       </AppBar>
       <Container>
-        <VideosTable videos={videos} />
+        <Outlet />
       </Container>
     </>
   );
