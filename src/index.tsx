@@ -4,8 +4,8 @@ import App from './App';
 import { AddVideo } from './components/add-videos';
 import { VideosTable } from './components/videos-table';
 
-const container = document.getElementById('root');
-const root = createRoot(container!);
+const container = document.getElementById('root') as HTMLElement;
+const root = createRoot(container);
 root.render(
     <BrowserRouter>
         <Routes>

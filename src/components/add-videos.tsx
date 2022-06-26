@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
 import { Button, Checkbox, Container, FormControl, InputLabel, ListItemIcon, ListItemText, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { styled } from '@mui/system';
 import { useState } from 'react';
 import { Author } from '../common/interfaces';
 import { categories, authors } from '../common/utils';
@@ -15,9 +15,9 @@ const videoFormats = {
     }
 };
 
-const SubmitButton = styled.div`
-    text-align: right;
-`;
+const SubmitButton = styled('div')({
+    textAlign: 'right'
+});
 
 export const AddVideo = () => {
 
@@ -166,9 +166,9 @@ export const AddVideo = () => {
                         </Select>
                     </FormControl>
                 </div>
-                <SubmitButton>
-                    <Button variant="contained" type="submit" sx={{ mt: 3, mr: 1 }}>Submit</Button>
-                    <Button variant="contained" color="inherit" type="submit" sx={{ mt: 3 }}>Cancel</Button>
+                <SubmitButton sx={{ mt: 3 }}>
+                    <Button variant="contained" type="submit" sx={{ mr: 1 }}>Submit</Button>
+                    <Button variant="contained" color="inherit" type="button">Cancel</Button>
                 </SubmitButton>
             </form>
         </Container>
