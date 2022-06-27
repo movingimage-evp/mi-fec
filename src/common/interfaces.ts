@@ -4,7 +4,7 @@ export interface Category {
 }
 
 export interface Video {
-  id: number;
+  id: number | null;
   catIds: number[];
   name: string;
   formats: VideoFormat

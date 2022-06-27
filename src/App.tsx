@@ -9,7 +9,7 @@ export const App = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, cursor: 'pointer' }} onClick={() => navigate("/")}>Videos</Typography>
-          <Button color="success" variant="contained" onClick={() => navigate("/add-video")}>Add Video</Button>
+          <Button color="success" variant="contained" onClick={() => navigate("add-video")}>Add Video</Button>
         </Toolbar>
       </AppBar>
       <Container>

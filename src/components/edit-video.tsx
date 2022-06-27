@@ -12,9 +12,9 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Author, Category } from '../common/interfaces';
-import { addVideo, getCategoriesAndAuthors } from '../services/videos';
+import { addVideo, getCategoriesAndAuthors, getVideoDetail } from '../services/videos';
 import { successfullyCreated } from '../utils/alerts-dialogue';
 
 // initial author state to add new video
@@ -32,9 +32,12 @@ const SubmitButton = styled('div')`
     text-Align: right;
 `;
 
-export const AddVideo = () => {
+export const EditVideo = () => {
 
     const navigate = useNavigate();
+    const { search } = useLocation();
+    const paramsId = new URLSearchParams(search).get('id');
+
     const [formValues, setFormValues] = useState(initialValues);
     const [videoAuthor, setVideoAuthor] = useState('');
     const [videoName, setVideoName] = useState("");
@@ -51,6 +54,32 @@ export const AddVideo = () => {
                 setAuthors(authors);
             });
     }, []);
+
+    const setFormFields = (data: Author) => {
+        const video = data.videos[0];
+
+        setVideoName(video.name);
+        setVideoAuthor(data.name);
+        // const selectedCategory = categories.filter(category => video.catIds.includes(category.id));
+        setVideoCategory(() => categories.filter(category => video.catIds.includes(category.id)));
+    }
+
+    useEffect(() => {
+
+        getVideoDetail(Number(paramsId))
+            .then((response) => {
+
+                const { data } = response;
+                setFormValues(data);
+                setFormFields(data);
+
+            }).catch((e: Error) => {
+                console.log(e);
+            });
+
+    }, [paramsId]);
+
+
 
     /**
      * To set up values for select fields
@@ -99,6 +128,16 @@ export const AddVideo = () => {
     };
 
     /**
+     * To reset form after submission
+     */
+    const reset = () => {
+        setVideoName("");
+        setVideoAuthor("");
+        setVideoCategory([]);
+        setFormValues(initialValues);
+    };
+
+    /**
      * To submit form with valid data
      */
     const handleSubmit = (e: any) => {
@@ -111,9 +150,8 @@ export const AddVideo = () => {
                 const { status } = response;
                 if (status === 201) {
                     successfullyCreated().then(isConfirmed => {
-                        if (isConfirmed) {
-                            navigate('/');
-                        }
+                        if (isConfirmed)
+                            reset();
                     });
                 }
 
