@@ -19,3 +19,11 @@ export const successfullyCreated = () => (
         'success'
     ).then(result => result.isConfirmed)
 );
+
+export const successfullyUpdated = () => (
+  Swal.fire(
+      'Success!',
+      'Video has been successfully updated',
+      'success'
+  ).then(result => result.isConfirmed)
+);

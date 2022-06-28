@@ -1,5 +1,5 @@
 import { getCategories } from './categories';
-import { addAuthorVideo, deleteAuthorVideo, getAuthors, getAuthorVideoDetail } from './authors';
+import { addAuthorVideo, getAuthors, getAuthorVideoDetail, updateAuthorVideo } from './authors';
 import { Author, ProcessedVideo } from '../common/interfaces';
 
 /**
@@ -19,10 +19,11 @@ export const getVideos = (): Promise<ProcessedVideo[]> => {
           const videoCategoryNames = filteredVideoCategories.map(vc => vc.name);
 
           processedVideos.push({
-            id: author.id,
+            id: video.id,
             name: video.name,
             author: author.name,
-            categories: videoCategoryNames
+            categories: videoCategoryNames,
+            authorId: author.id
           });
 
         });
@@ -52,12 +53,8 @@ export const addVideo = (data: Author) => {
   return addAuthorVideo(data);
 };
 
-/**
- * To delete video against author
- * @returns 
- */
-export const deleteVideo = (id: number) => {
-  return deleteAuthorVideo(id);
+export const updateVideo = (data: Author) => {
+  return updateAuthorVideo(data);
 };
 
 /**

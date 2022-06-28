@@ -4,7 +4,7 @@ export interface Category {
 }
 
 export interface Video {
-  id: number | null;
+  id: number;
   catIds: number[];
   name: string;
   formats: VideoFormat
@@ -28,4 +28,5 @@ export interface ProcessedVideo {
   name: string;
   author: string;
   categories: string[];
+  authorId: number;
 }

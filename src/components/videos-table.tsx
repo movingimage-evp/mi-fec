@@ -5,10 +5,9 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 import { ProcessedVideo } from '../common/interfaces';
-import { deleteVideo, getVideos } from '../services/videos';
+import { getVideos } from '../services/videos';
 import { useNavigate } from 'react-router-dom';
 import { confirmationToDelete } from '../utils/alerts-dialogue';
-import Swal from 'sweetalert2';
 
 const Options = styled('div')`
   & button svg {
@@ -41,28 +40,14 @@ export const VideosTable = () => {
   /**
    * To delete video
    */
-  const deleteRecord = (videoId: number) => {
+  const deleteRecord = (videoId: number, authorId: number) => {
     confirmationToDelete().then(isDeleted => {
       if (isDeleted) {
 
-        // Delete the video using video id
-        deleteVideo(videoId).then(response => {
-
-          const { status } = response;
-          if (status === 200) {
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            )
-            let deletedVideos = videos.filter((video) => video.id !== videoId);
-            setVideos(deletedVideos);
-          }
-
-        }).catch((e: Error) => {
-          console.log(e);
-        });
-
+        // TODO: integrate rest API to delete video of selected author
+        // Deleting on frontend because unable to find delelte API for selected author
+        let deletedVideos = videos.filter((video) => video.id !== videoId || video.authorId !== authorId);
+        setVideos(deletedVideos);
       }
     });
   }
@@ -92,12 +77,19 @@ export const VideosTable = () => {
                     variant="contained"
                     type="button"
                     sx={{ mr: 1 }}
-                    onClick={() => navigate(`edit-video?id=${video.id}`)}
+                    onClick={() => navigate(`manage-video`,
+                      { state: { videoId: video.id, authorId: video.authorId } }
+                    )}
                   >
                     <EditOutlinedIcon />
                     Edit
                   </Button>
-                  <Button variant="contained" color="error" type="button" onClick={() => deleteRecord(video.id)}>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    type="button"
+                    onClick={() => deleteRecord(video.id, video.authorId)}
+                  >
                     <DeleteOutlineOutlinedIcon />
                     Delete
                   </Button>

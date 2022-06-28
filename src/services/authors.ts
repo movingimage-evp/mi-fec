@@ -17,12 +17,8 @@ export const addAuthorVideo = (data: Author) => {
   return http.post<Author>("/authors", data)
 };
 
-/**
- * API | DELETE
- * rest api call to delete video
- */
-export const deleteAuthorVideo = (id: number) => {
-  return http.delete<Author>(`/authors/${id}`);
+export const updateAuthorVideo = (data: Author) => {
+  return http.put<Author>(`/authors/${data.id}`, data)
 };
 
 /**
