@@ -1,11 +1,11 @@
 import React from 'react';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
-import { ProcessedVideo } from '../common/interfaces';
+import { ProcessedVideo } from '../../common/interfaces';
 
 interface VideosTableProps {
-    videos: ProcessedVideo[];
+  videos: ProcessedVideo[];
 }
-
+// TODO: update video table
 export const VideosTable: React.FC<VideosTableProps> = ({ videos }) => {
   return (
     <TableContainer component={Paper} style={{ marginTop: '40px' }}>
@@ -26,7 +26,7 @@ export const VideosTable: React.FC<VideosTableProps> = ({ videos }) => {
               </TableCell>
               <TableCell>{video.author}</TableCell>
               <TableCell>{video.categories.join(', ')}</TableCell>
-              <TableCell> {/* add buttons here as needed */}  </TableCell>
+              <TableCell> {/* add buttons here as needed */} </TableCell>
             </TableRow>
           ))}
         </TableBody>
