@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "json-server db.json -p 3001 & react-scripts start",
+    "start": "react-scripts start",
+    "start:server": "json-server db.json -p 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
