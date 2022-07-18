@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import { VideosTable } from './components/videos-table';
-import { getVideos } from './services/videos';
-import { ProcessedVideo } from './common/interfaces';
+import { Videos } from './components/videos';
 
 const App: React.FC = () => {
-  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
-
-  useEffect(() => {
-    getVideos()
-      .then((videos) => {
-        setVideos(videos);
-      });
-  }, []);
-
+  
   return (
     <>
       <AppBar position="static">
@@ -22,7 +12,7 @@ const App: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Container>
-        <VideosTable videos={videos} />
+        <Videos />
       </Container>
     </>
   );
