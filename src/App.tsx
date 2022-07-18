@@ -1,29 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { AppBar, Container, Toolbar, Typography } from '@mui/material';
-import { VideosTable } from './components/videos-table';
-import { getVideos } from './services/videos';
-import { ProcessedVideo } from './common/interfaces';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { PATH } from './common/enums/path.enum';
+import { Videos } from './components/video/videos';
+import { Layout } from './components/public/layout';
 
 const App: React.FC = () => {
-  const [videos, setVideos] = useState<ProcessedVideo[]>([]);
-
-  useEffect(() => {
-    getVideos()
-      .then((videos) => {
-        setVideos(videos);
-      });
-  }, []);
-
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">Videos</Typography>
-        </Toolbar>
-      </AppBar>
-      <Container>
-        <VideosTable videos={videos} />
-      </Container>
+      <Router>
+        <Routes>
+          <Route path={PATH.MAIN} element={<Navigate to={PATH.VIDEOS} replace />} />
+          <Route
+            path={PATH.VIDEOS}
+            element={
+              <Layout>
+                <Videos />
+              </Layout>
+            }
+          />
+          <Route path="*" element={<Navigate to={PATH.MAIN} replace />} />
+        </Routes>
+      </Router>
     </>
   );
 };
