@@ -29,7 +29,8 @@
           "formats": {
             "one": { "res": "1080p", "size": 1000 },
             "two": { "res": "720p", "size": 2000 },
-            "three": { "res": "720p", "size": 900 }
+            "three": { "res": "720p", "size": 900 },
+            "testHighQuality": { "res": "1080p", "size": 2000 } 
           },
           "releaseDate": "2018-08-09"
         },
