@@ -1,39 +1,40 @@
-export interface Category {
+export interface ICategory {
   id: number;
   name: string;
 }
 
-export interface Video {
+export interface IVideo {
   id: number;
   catIds: number[];
   name: string;
-  formats: Formats;
+  formats: IFormats;
   releaseDate: string;
 }
 
-export interface Author {
+export interface IAuthor {
   id: number;
   name: string;
-  videos: Video[];
 }
 
-export interface ProcessedVideo {
+export interface IAuthorVideos extends IAuthor {
+  videos: IVideo[];
+}
+
+export interface IProcessedVideo {
   id: number;
   name: string;
-  author: string;
-  categories: Category[]; // using category object because: better to have value(id) and label together
-  authorId: number;  // using authorId to get author indentification.
-  formats: Formats;
+  author: IAuthor; // using category object because: better to have value(id) and label together
+  categories: ICategory[]; // using category object because: better to have value(id) and label together
+  formats: IFormats;
   releaseDate: string;
 }
 
-
-export interface Formats {
-  [key: string]: FormatData
+export interface IFormats {
+  [key: string]: IFormatData;
 }
 
-export interface FormatData {
-  res: string, 
-  size: number,
-  name?: string, // name:optional because: it will be only used once change the Formats from onbject to  array for sorting 
+export interface IFormatData {
+  res: string;
+  size: number;
+  name?: string; // name:optional because: it will be only used once change the Formats from onbject to  array for sorting
 }
