@@ -123,14 +123,16 @@ export const Videos: React.FC<IVideosTableProps> = () => {
     setVideoDetailsData(undefined);
   };
 
-  const deleteVideo = (videoId: number) => {
-    let videosArr = [...videos];
-    videosArr.splice(
-      videos.findIndex((element) => element.id === videoId),
-      1
-    );
+  const deleteVideo = (videoId?: number) => {
+    if (videoId !== undefined) {
+      let videosArr = [...videos];
+      videosArr.splice(
+        videos.findIndex((element) => element.id === videoId),
+        1
+      );
 
-    setVideos(videosArr);
+      setVideos(videosArr);
+    }
     setVideoDelete(undefined);
   };
 
@@ -238,16 +240,7 @@ export const Videos: React.FC<IVideosTableProps> = () => {
             </TableContainer>
           )}
 
-          {videoDelete && (
-            <DeleteVideoConfirmation
-              onClose={(action) => {
-                if (action !== undefined) {
-                  deleteVideo(action);
-                }
-              }}
-              videoDetails={videoDelete}
-            />
-          )}
+          {videoDelete && <DeleteVideoConfirmation onClose={deleteVideo} videoDetails={videoDelete} />}
         </div>
       )}
 
