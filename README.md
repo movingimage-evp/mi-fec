@@ -24,3 +24,10 @@
 - added: action buttons foradd/update/delete video in VideoManager.tsx
 - added DeleteVideoConfirmation.tsx for delete confrimation dialog
 - changed interface naming to start 'I'
+
+## Update day 4:
+
+- # task performed :
+- added: Validations for add/update form.
+- Validation Implementation based from A JSON object.
+- other small fixes
