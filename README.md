@@ -1,6 +1,6 @@
-## **_ Check daily updates here _**
+# === Check daily updates here ===
 
-# Started working of assignment on Monday 18.07.2022
+## Started working of assignment on Monday 18.07.2022
 
 ## Update day 1:
 
