@@ -158,10 +158,17 @@ export const VideoDetails: React.FC<IVideoDetailsProps> = ({ onSubmitSuccess, vi
         formats: videoDetailsData.formats
           ? videoDetailsData.formats
           : {
-              one: { res: '1080p', size: 1000 },
+              one: { res: '1080p', size: 1000 }, // default quality
             },
-        releaseDate: videoDetailsData.releaseDate ? videoDetailsData.releaseDate : '2018-08-09',
+        releaseDate: videoDetailsData.releaseDate ? videoDetailsData.releaseDate : getRandomDate(),
       });
+  };
+
+  const getRandomDate = () => {
+    let dateStr = '' + (Math.floor(Math.random() * (27 - 1 + 1)) + 1); // 27: to avoid leap year error
+    let monthStr = '' + (Math.floor(Math.random() * (12 - 1 + 1)) + 1);
+    let yearStr = '' + (Math.floor(Math.random() * (2025 - 2018 + 1)) + 2018); // random year from 2018 to 2022
+    return `${yearStr}-${monthStr.length === 1 ? '0' + monthStr : monthStr}-${dateStr.length === 1 ? '0' + dateStr : dateStr}`;
   };
 
   return (
@@ -261,6 +268,7 @@ const ButtonStyled = styled(Button)<ButtonProps>(() => ({
   marginLeft: '20px',
 }));
 
+// form validation rules from json
 const FORM_VALIDATION_RULES: IFormValidator = {
   videoName: [
     {
