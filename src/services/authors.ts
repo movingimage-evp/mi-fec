@@ -1,5 +1,7 @@
-import { Author } from '../common/interfaces';
+import type { Author } from '../common/interfaces';
 
-export const getAuthors = (): Promise<Author[]> => {
-  return fetch(`${process.env.REACT_APP_API}/authors`).then((response) => (response.json() as unknown) as Author[]);
+export const getAuthors = async (): Promise<Author[]> => {
+  const response = await fetch(`${process.env.REACT_APP_API}/authors`);
+
+  return response.json() as unknown as Author[];
 };
