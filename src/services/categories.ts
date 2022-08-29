@@ -1,5 +1,7 @@
-import { Category } from '../common/interfaces';
+import type { Category } from '../common/interfaces';
 
-export const getCategories = (): Promise<Category[]> => {
-  return fetch(`${process.env.REACT_APP_API}/categories`).then((response) => (response.json() as unknown) as Category[]);
+export const getCategories = async (): Promise<Category[]> => {
+  const response = await fetch(`${process.env.REACT_APP_API}/categories`);
+
+  return response.json() as unknown as Category[];
 };
