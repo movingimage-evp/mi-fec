@@ -10,6 +10,11 @@
     "test": "vitest"
   },
   "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "web-vitals": "^5.1.0"
+  },
+  "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -17,17 +22,12 @@
     "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "json-server": "^0.17.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "typescript": "^5.9.3",
-    "web-vitals": "^5.1.0"
-  },
-  "devDependencies": {
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/ui": "^4.1.0",
     "jsdom": "^29.0.0",
+    "json-server": "^0.17.4",
     "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
     "vite": "^8.0.0",
     "vitest": "^4.1.0"
   }
