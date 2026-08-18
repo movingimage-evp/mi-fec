@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches-ignore:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js (.nvmrc)
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # `npm ci` fails on its own when package.json and package-lock.json
+      # disagree, but only for the dependency ranges themselves. This also
+      # catches a lockfile that a dependency bot left semantically stale.
+      - name: Verify package-lock.json is in sync
+        run: |
+          npm install --package-lock-only --no-audit --no-fund
+          git diff --exit-code --stat -- package-lock.json \
+            || { echo "::error::package-lock.json is out of sync with package.json. Run 'npm install' and commit the lockfile."; exit 1; }
+
+      - name: Build
+        run: npm run build
+
+      - name: Run typecheck
+        run: npm run typecheck
+
+      - name: Run unit tests
+        run: npm run test -- --run

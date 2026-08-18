@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "ignorePresets": [":pinDevDependencies"],
+  "enabledManagers": ["npm", "nvm", "github-actions"],
+  "packageRules": [
+    {
+      "matchManagers": ["npm", "nvm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm dependencies (minor and patch)",
+      "groupSlug": "npm-minor-patch"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions dependencies (minor and patch)",
+      "groupSlug": "github-actions-minor-patch"
+    }
+  ],
+  "labels": ["maintenance", "renovate"],
+  "rangeStrategy": "bump",
+  "prHourlyLimit": 10,
+  "branchConcurrentLimit": 40
+}
