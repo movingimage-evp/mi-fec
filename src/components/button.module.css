@@ -9,3 +9,10 @@
 .primary {
   background: var(--green);
 }
+
+.search {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
