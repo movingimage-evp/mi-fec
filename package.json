@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
+    "test": "vite",
     "start": "json-server db.json -p 3001 & npm run dev",
     "build": "vite build",
     "preview": "vite preview",
