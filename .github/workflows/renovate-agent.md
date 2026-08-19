@@ -5,7 +5,7 @@ description: Reviews Renovate dependency PRs — applies breaking-change migrati
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
+    types: [opened, synchronize, reopened]
     branches: [main]
   workflow_dispatch:
   # Renovate authors these PRs, so it must be allow-listed as a trigger actor
