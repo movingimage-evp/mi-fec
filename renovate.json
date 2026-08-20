@@ -3,6 +3,7 @@
   "extends": ["config:best-practices"],
   "ignorePresets": [":pinDevDependencies"],
   "enabledManagers": ["npm", "nvm", "github-actions"],
+  "recreateWhen": "always",
   "packageRules": [
     {
       "matchManagers": ["npm", "nvm"],
